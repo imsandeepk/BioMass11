@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biomass Mapping Tool</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <style>
+    .form-container {
+      margin-top: 20px;
+    }
+  </style>
+  <style>
+    .form-container {
+      margin-top: 20px;
+    }
+    .graph-container {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-top: 20px;
+      max-height: 500px; /* Set the maximum height for the graph container */
+      overflow-y: auto; /* Enable vertical scrolling if content exceeds the container height */
+      max-width: 1120px;
+    }
+    .graph-item {
+      margin-bottom: 20px;
+    }
+    .output-box {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <form action="/submit" method="POST">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Biomass Mapping Tool</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                Land Use
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Total</a></li>
+                <li><a class="dropdown-item" href="#">Cropland</a></li>
+                <li><a class="dropdown-item" href="#">Marginal Land</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled">Documentation</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ...Existing HTML code... -->
+    <div class="container form-container">
+      <div class="row">
+        <div class="col">
+          <label for="inputCountry" class="form-label">Country</label>
+          <input type="text" id="inputCountry" name="country" class="form-control" aria-label="Country" placeholder="Enter country name">
+        </div>
+        <div class="col">
+          <label for="inputProvince" class="form-label">Province</label>
+          <input type="text" id="inputProvince" name="province" class="form-control" aria-label="Province" placeholder="Enter province name">
+        </div>
+        <div class="col">
+          <label for="inputWaterSupply" class="form-label">Water Supply Future</label>
+          <select class="form-select" id="inputWaterSupply" name="water_supply_future" aria-label="Water Supply Future">
+            <option value="Available water content of 200 mm/m (under irrigation conditions)">Available water content of 200 mm/m (under irrigation conditions)</option>
+            <option value="Available water content of 200 mm/m (under rain-fed conditions)">Available water content of 200 mm/m (under rain-fed conditions)</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+        <div class="col">
+          <label for="inputClimateModel" class="form-label">Climate Model</label>
+          <select class="form-select" id="inputClimateModel" name="climate_model" aria-label="Climate Model" >
+            <option value="GFDL-ESM2M">GFDL-ESM2M</option>
+            <option value="NorESM1-M">NorESM1-M</option>
+            <option value="MIROC-ESM-CHEM">MIROC-ESM-CHEM</option>
+            <option value="IPSL-CM5A-LR">IPSL-CM5A-LR</option>
+            <option value="HadGEM2-ES">HadGEM2-ES</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+        <div class="col">
+          <label for="inputInputLevel" class="form-label">Input Level</label>
+          <select class="form-select" id="inputInputLevel" name="input_level" aria-label="Input Level" >
+            <option value="High">High</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col text-center">
+          <label for="plotTypeSelect" class="form-label">Plot Type</label>
+          <select class="form-select" id="plotTypeSelect" name="plot_type" aria-label="Plot Type">
+            <option value="cropland">Cropland</option>
+            <option value="marginal">Marginal Land</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="container graph-container">
+      {% if graph_image %}
+      <div class="graph-item">
+        <img src="data:image/png;base64,{{ graph_image }}" alt="Graph">
+      </div>
+      {% else %}
+      <p>No Graphs requested</p>
+      {% endif %}
+    </div>
+    <div class="container form-container">
+      <div class="row mt-3">
+        <div class="col-auto align-self-end">
+          <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
+
+</html>
