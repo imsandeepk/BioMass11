@@ -1478,9 +1478,9 @@ def graph_plotter_marginal(shapefile, climate_model, water_supply_future, input_
 
 
 # Comes handy in a lot of situations
-with rasterio.open(potential_yield.iloc[2,14].strip()) as src:
-    standard_transform = src.transform 
-    standard_crs= src.crs
+# with rasterio.open(potential_yield.iloc[2,14].strip()) as src:
+#     standard_transform = src.transform 
+#     standard_crs= src.crs
     
 
 
