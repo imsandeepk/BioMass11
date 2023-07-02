@@ -1319,10 +1319,10 @@ def get_biomass_potential_for_marginal(shapefile,time_period, climate_model, rcp
     
     net_area = extract_pixel_area(potential_yield.iloc[2,14].strip(), shapefile) #Just a reference raster so doesn't matter
     
-    #Using sample raster potential_yield.iloc[2,14] to extract the base transform and crs used for all
-    with rasterio.open(potential_yield.iloc[2,14].strip()) as src:
-        standard_transform = src.transform
-        standard_crs = src.crs
+    # #Using sample raster potential_yield.iloc[2,14] to extract the base transform and crs used for all
+    # with rasterio.open(potential_yield.iloc[2,14].strip()) as src:
+    #     standard_transform = src.transform
+    #     standard_crs = src.crs
     
     remaining_area = np.subtract(net_area,harvested_area_from_shapefile)
     final_potential = np.multiply(max_potential, net_area)*(10**7)#Unit conversion MJ to Joules and 10 Kg to Kg
@@ -1465,9 +1465,9 @@ def graph_plotter_marginal(shapefile, climate_model, water_supply_future, input_
     plt.tight_layout()  # Adjust spacing between subplots
     plt.show()
     
-    with rasterio.open(potential_yield.iloc[2,14].strip()) as src:
-        standard_transform = src.transform 
-        standard_crs= src.crs
+    # with rasterio.open(potential_yield.iloc[2,14].strip()) as src:
+    #     standard_transform = src.transform 
+    #     standard_crs= src.crs
     
     
     
